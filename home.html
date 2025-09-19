@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS</title>
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="icon" href="/img/logo.jpg" />
+</head>
+<body>
+    {{groupsHtml}}
+    <h2>Request</h2>
+    <table border=1 cellspacing=0 cellpadding=5>
+        <tbody>
+            <tr><td>method</td><td>{{method}}</td></tr>
+            <tr><td>protocol</td><td>{{httpVersion}}</td></tr>
+            <tr><td>path</td><td>{{url}}</td></tr>
+            <tr><td>route</td><td>{{path}}</td></tr>
+            <tr><td>query</td><td>{{query}}</td></tr>
+        </tbody>
+    </table>
+    <img src="/img/JavaScript-logo.png" alt="logo" />
+
+    <script src="/js/site.js"></script>
+</body>
+</html>
