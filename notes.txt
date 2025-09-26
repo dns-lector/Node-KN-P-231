@@ -1,0 +1,19 @@
+АРІ Application Program Interface
+
+                Program - інформаційний "центр"
+             /    |    \
+      Web        API       Mobile
+  Application     |      Application - самостійна програма, 
+                  |                    яка взаємодіє з Програмою
+               зовнішні
+               програми
+
+
+(також Додаток - несамостійна програма, плагін, addon, розширення)
+
+Web-API - базується на НТТР
+CRUD-повнота -- забезпечення повного життєвого циклу даних
+Create   POST
+Read     GET  
+Update   PUT(replace), PATCH(partially update)
+Delete   DELETE

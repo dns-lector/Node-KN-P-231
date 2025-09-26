@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Tester</title>
+</head>
+<body>
+    <h1>Випробування API</h1>
+    <button onclick="testGet()">GET</button>
+    <div>
+        <input name="user-name"  type="text" /> <br/>
+        <input name="user-email" type="email" /> <br/>
+        <input name="user-phone" type="tel" /> <br/>
+        <button onclick="testPost()">POST</button>
+    </div>
+    
+    <p id="out"></p>
+    <script>
+        function testPost() {
+            const userName  = document.querySelector('[name="user-name"]' ).value;
+            const userEmail = document.querySelector('[name="user-email"]').value;
+            const userPhone = document.querySelector('[name="user-phone"]').value;
+            const data = {userName, userEmail, userPhone};
+            window.fetch("/api/client", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(r => {
+                // console.log(r.headers.get("Content-Type"));
+                if(r.status != 200) {
+                    out.innerText = `Сервер відповів помилкою ${r.status}`;
+                }
+                else {
+                    let ct = r.headers.get("Content-Type");
+                    if(typeof ct == 'string' &&  ct.startsWith("application/json")) {
+                        r.json().then(j => out.innerText = JSON.stringify(j));
+                    }
+                    else {
+                        out.innerText = `Відповідь Сервера не є JSON '${ct}'`;
+                    }
+                }
+            });
+        }
+        
+        function testGet() {
+            fetch(                   // Асинхронне надсилання запитів також відоме як AJAX 
+                "/api/client",       // Адреса запиту (URL)
+            {                        // Параметри запиту
+                method: "GET",       // Метод запиту
+                headers: {           // заголовки
+                    "Connection": "close",
+                    "Accept": "application/json"
+                },
+                // body: '"Hello"'   // тіло (якщо дозволяється)
+            })                       // Обробка відповіді відбувається у 2 етапи
+            .then(r => r.text())     // спочатку запускається перетворення text/json/blob
+            .then(j => {             // потім обробляється результат перетворення 
+                out.innerText = j;
+            });
+        }
+    </script>
+</body>
+</html>
